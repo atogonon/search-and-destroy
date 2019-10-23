@@ -2,13 +2,20 @@
 
 //Complete this algo
 //will determine if a list contains a loop. It should return true if a loop exists
-const isLoop = linkedlist => {
-  console.log(linkedlist.getNthNode(1));
-  currentValue = [];
-  currentValue.push(linkedlist.head.value);
-  console.log(currentValue);
+const isLoop = (linkedlist, memo={}, index=1) => {
+  let node = linkedlist.getNthNode(index)
+  console.log(node.value)
 
-  return false;
+  if (node.value in memo) {
+    return true
+  }
+  else if (node.next === null) {
+    return false
+  }
+  else if (!(node.value in memo)) {
+    memo[node.value]=true
+    return isLoop(linkedlist, memo, index+1)
+  }
 };
 
 /*
